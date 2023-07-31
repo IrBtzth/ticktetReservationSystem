@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="http://127.0.0.1:5000/reportDonwload" target="_blank" />
+
+  <style>
+    /* Estilos CSS */
+    html {
+      min-height: 100% !important;
+      height: 100%;
+    } 
+    
+    body {
+      font-family: 'Times New Roman', Times, serif;
+    }
+    body::after {
+    content: "";
+    background: url('/static/img/train.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
+
+  }
+    
+    
+    h1 {
+      color: #130a0a;
+      text-align: center;
+      
+    }
+
+    h3 {
+      color: #150707;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      
+    }
+    
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #dddddd;
+    }
+    
+    th {
+      background-color: #846954;
+    }
+
+    td {
+      background-color: white;
+    }
+  </style>
+</head>
+<body >
+  
+  
+  <div class="page-banner-area" >
+  
+    <h1>TICKTET RESERVATION SYSTEM</h1>
+
+    <h3>LIST OF BOOKINGS FOR {{schedule.date}}/{{schedule.times}}</h3>
+    <br/>
+    <p>Train {{schedule.trains}}({{schedule}}): {{schedule.routes.fromRoute}} to {{schedule.routes.toRoute}}</p>
+    <table>
+      <tr>
+        <th>SN</th>
+        <th>Full name</th>
+        <th>Code/Class</th>
+        <th>Seat No</th>
+      </tr>
+      {%for booking in bookings%}
+      <tr>
+      
+        <td>{{booking}}</td>
+        <td>{{booking.userb.name}} {{booking.userb.lastName}}</td>
+        <td>{{booking.code}}/ {{booking.payment.amount}}</td>
+        
+        <td>{{booking.seat}}</td>
+      </tr>
+      {%endfor%}
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base_user.html" %} {% block title %}Sample{% endblock %} 
+
+{% block content %}
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    
+    <h1 class="h3 mb-2 text-gray-800">Passengers' Dashboard</h1>
+    
+    <div class="alertPay">
+        <h4>
+            <ion-icon name="information-sharp"></ion-icon>{{className[0]}}
+        </h4>
+        <p class="mb-4">You are about to buy {{numberTickets}} Ticket(s) for {{scheduleRoute}} </p>
+        <p class="mb-4">{{numberTickets}} x ${{className[1]}} = ${{amount}} </p>
+        <a href="{{url_for('app.create_checkout_session', var=booking_items, id=schedule_id)}}" >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Pay now</button>
+        </a>
+      </div>
+</div>
+
+
+{% endblock %}

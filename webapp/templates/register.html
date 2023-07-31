@@ -1,0 +1,153 @@
+{% extends "index.html" %} {% block title %}{% endblock %} 
+
+{% block content %}
+
+
+
+{% for message in get_flashed_messages() %}
+
+	<div class="alert alert-primary alert-dismissible show" role="alert">
+		{{message}}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>	
+
+{% endfor %}
+
+{% for field, errors in form.errors.items() %}
+<div class="alert alert-error">
+    {{ form[field].label }}: {{ ', '.join(errors) }}
+</div>
+{% endfor %}
+
+
+  <div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+              </div>
+              <form class="user" id="form-register" method="POST" action="{{ url_for('.register') }}">
+
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {% if form.username.errors %}
+                        {% for e in form.username.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.username(class_="form-control form-control-user") }}
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                  {{ form.name.label }}
+                  {% if form.name.errors %}
+                      {% for e in form.name.errors %}
+                          <p class="help-block">{{ e }}</p>
+                      {% endfor %}
+                  {% endif %}
+                  {{ form.name(class_="form-control form-control-user") }}
+              </div>
+            
+              <div class="col-sm-6">
+                {{ form.lastName.label }}
+                {% if form.lastName.errors %}
+                    {% for e in form.lastName.errors %}
+                        <p class="help-block">{{ e }}</p>
+                    {% endfor %}
+                {% endif %}
+                {{ form.lastName(class_="form-control form-control-user") }}
+            </div>
+          </div>
+                <div class="form-group">
+                  {{ form.email.label }}
+                  {% if form.email.errors %}
+                      {% for e in form.email.errors %}
+                          <p class="help-block">{{ e }}</p>
+                      {% endfor %}
+                  {% endif %}
+                  {{ form.email(class_="form-control form-control-user") }}
+              </div>
+              <div class="form-group">
+                {{ form.phone.label }}
+                {% if form.phone.errors %}
+                    {% for e in form.phone.errors %}
+                        <p class="help-block">{{ e }}</p>
+                    {% endfor %}
+                {% endif %}
+                {{ form.phone(class_="form-control form-control-user") }}
+            </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    {{ form.password.label }}
+                    {% if form.password.errors %}
+                        {% for e in form.password.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.password(class_="form-control form-control-user") }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form.confirm.label }}
+                    {% if form.confirm.errors %}
+                        {% for e in form.confirm.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.confirm(class_="form-control form-control-user") }}
+                </div>
+              </div>
+                <div class="form-group">
+                    {{ form.recaptcha.label }}
+                    {% if form.recaptcha.errors %}
+                        {% for e in form.recaptcha.errors %}
+                            <p class="help-block">{{ e }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {{ form.recaptcha() }}
+                </div>
+                
+
+                {{form.submit(class='btn btn-primary btn-user btn-block')}}
+                <hr>
+                <a href="index" class="btn btn-google btn-user btn-block">
+                  <i class="fab fa-google fa-fw"></i> Register with Google
+                </a>
+                <a href="index" class="btn btn-facebook btn-user btn-block">
+                  <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                </a>
+              
+              <hr>
+              <div class="text-center">
+                <a class="small" href="forgot-password">Forgot Password?</a>
+              </div>
+              <div class="text-center">
+                <a class="small" href="login">Already have an account? Login!</a>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% endblock %}
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+ 
+  

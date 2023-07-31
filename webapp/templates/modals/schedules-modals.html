@@ -1,0 +1,57 @@
+<!-- Edit schedule -->
+<button type="button" class="btn btn-edit" data-toggle="modal" data-target="#editModal{{schedule.id}}">
+    Edit
+  </button>
+  
+  <!-- Modal -->
+  <form class="row g-3" method="POST" action="{{url_for('app.scheduleUpdate', id=schedule.id)}}">
+  <div class="modal fade" id="editModal{{schedule.id}}" tabindex="-1" role="dialog" aria-labelledby="editModal{{schedule.id}}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModal{{schedule.id}}">Edit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{form.hidden_tag()}}
+
+          {{form.fcFee.label(class="form-control-label")}}
+          {{form.fcFee(class="form-control form-control", value=schedule.fcFee)}}
+          <br/>
+          {{form.scFee.label(class="form-control-label")}}
+          {{form.scFee(class="form-control form-control", value=schedule.scFee)}}
+          <br/>
+          {{form.date.label(class="form-control-label")}}
+          {{form.date(class="form-control form-control",value=schedule.fcFee)}}
+          <br/>
+          {{form.times.label(class="form-control-label")}}
+          {{form.times(class="form-control form-control",value=schedule.fcFee)}}
+          <br/>
+          {{form.routes_id.label(class="form-control-label")}}
+          {{form.routes_id(class="form-control form-control",value=schedule.routes_id)}}
+          <br/>
+          {{form.trains_id.label(class="form-control-label")}}
+          {{form.trains_id(class="form-control form-control",value=schedule.trains_id)}}
+          <br/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {{form.submit(class="btn btn-edit")}}
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+<!--Delete Button-->
+    
+<button type="submit" class="btn btn-light" >
+    <a href="{{url_for('app.scheduleDelete', id=schedule.id)}}">
+      Delete
+    </a>
+  </button>
+  
+</td>

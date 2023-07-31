@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block title %}Sample{% endblock %} 
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+
+	<div class="alert alert-primary alert-dismissible show" role="alert">
+		{{message}}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>	
+
+{% endfor %}
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- DataTales -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              
+              <h5 class="m-0 font-weight-bold text-primary">All feedback</h5>
+              <!-- Add route -->
+            
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Passegenr</th>
+                      <th>Message</th>
+                      <th>Action</th>
+                      
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>#</th>
+                      <th>Passegenr</th>
+                      <th>Message</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    {% for feedback in feedbacks%}
+                    <tr>
+                      <td>{{feedback.id}}</td>
+                      <td>{{feedback.message}}</td>
+                      <td>{{feedback.response}}</td>
+
+                      <td>
+            {%if feedback.response == 'None'%}              
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
+                Reply
+              </button>
+      
+            
+  
+              <!-- Modal -->
+              
+              <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="ModalAddLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ModalAddLabel">Add a feedback</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="POST" action="{{url_for('app.feedbackUpdate', id=feedback.id)}}">
+                        {{form.hidden_tag()}}
+                        <div class="form-group">
+                            {{ form.message.label }}
+                            {% if form.message.errors %}
+                                {% for e in form.message.errors %}
+                                    <p class="help-block">{{ e }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            {{ form.message(class_="form-control form-control-user") }}
+                        </div>
+  
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      {{form.submit(class="btn btn-edit")}}
+                    
+                    </div>
+                </form>
+                  </div>
+                </div>
+              </div>
+              
+  
+              </div>
+                      </td>
+                    
+                    </tr>
+                    {%endif%}     
+                    {%endfor%}
+                   
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+{% endblock %}
+
+{% block js %}
+    {{ super() }}
+    <!-- Page level plugins -->
+    <script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap5.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ url_for('static', filename='js/demo/datatables-demo.js')}}"></script>
+{% endblock %}

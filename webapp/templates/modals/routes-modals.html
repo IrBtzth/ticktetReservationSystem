@@ -1,0 +1,45 @@
+<!-- Edit route -->
+<button type="button" class="btn btn-edit" data-toggle="modal" data-target="#editModal{{route.id}}">
+    Edit
+  </button>
+  
+  <!-- Modal -->
+  <form class="row g-3" method="POST" action="{{url_for('app.routeUpdate', id=route.id)}}">
+  <div class="modal fade" id="editModal{{route.id}}" tabindex="-1" role="dialog" aria-labelledby="editModal{{route.id}}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModal{{route.id}}">Edit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            {{form.hidden_tag()}}
+
+            {{form.fromRoute.label(class="form-control-label")}}
+            {{form.fromRoute(class="form-control form-control", value=route.fromRoute)}}
+            <br/>
+            {{form.toRoute.label(class="form-control-label")}}
+            {{form.toRoute(class="form-control form-control", value=route.toRoute)}}
+            <br/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {{form.submit(class="btn btn-edit")}}
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+<!--Delete Button-->
+    
+<button type="submit" class="btn btn-light" >
+    <a href="{{url_for('app.routeDelete', id=route.id)}}">
+      Delete
+    </a>
+  </button>
+  
+</td>
